@@ -1,4 +1,3 @@
-{{ define "base" }}
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -120,7 +119,6 @@
         <script src="/static/assets/js/app.bundle.js="></script>
     </body>
 </html>
-{{end}}
 {{ define "invalid-feedback" }}
    
 {{ end }}

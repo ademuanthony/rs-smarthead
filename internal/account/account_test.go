@@ -7,14 +7,15 @@ import (
 	"testing"
 	"time"
 
+	"smarthead/internal/platform/auth"
+	"smarthead/internal/platform/tests"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/google/go-cmp/cmp"
 	"github.com/huandu/go-sqlbuilder"
 	"github.com/lib/pq"
 	"github.com/pborman/uuid"
 	"github.com/pkg/errors"
-	"smarthead/internal/platform/auth"
-	"smarthead/internal/platform/tests"
 )
 
 var (

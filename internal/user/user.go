@@ -5,15 +5,16 @@ import (
 	"database/sql"
 	"time"
 
+	"smarthead/internal/platform/auth"
+	"smarthead/internal/platform/notify"
+	"smarthead/internal/platform/web/webcontext"
+
 	"github.com/huandu/go-sqlbuilder"
 	"github.com/jmoiron/sqlx"
 	"github.com/pborman/uuid"
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/bcrypt"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	"smarthead/internal/platform/auth"
-	"smarthead/internal/platform/notify"
-	"smarthead/internal/platform/web/webcontext"
 )
 
 const (

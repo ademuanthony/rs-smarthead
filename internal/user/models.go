@@ -8,13 +8,14 @@ import (
 	"strings"
 	"time"
 
+	"smarthead/internal/platform/notify"
+	"smarthead/internal/platform/web"
+	"smarthead/internal/platform/web/webcontext"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 	"github.com/pkg/errors"
 	"github.com/sudo-suhas/symcrypto"
-	"smarthead/internal/platform/notify"
-	"smarthead/internal/platform/web"
-	"smarthead/internal/platform/web/webcontext"
 )
 
 // Repository defines the required dependencies for User.

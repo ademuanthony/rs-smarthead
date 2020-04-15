@@ -7,15 +7,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/go-cmp/cmp"
-	"github.com/pborman/uuid"
-	"github.com/pkg/errors"
 	"smarthead/internal/account"
 	"smarthead/internal/account/account_preference"
 	"smarthead/internal/platform/auth"
 	"smarthead/internal/platform/tests"
 	"smarthead/internal/user"
 	"smarthead/internal/user_account"
+
+	"github.com/google/go-cmp/cmp"
+	"github.com/pborman/uuid"
+	"github.com/pkg/errors"
 )
 
 var (

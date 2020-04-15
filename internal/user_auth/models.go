@@ -3,11 +3,12 @@ package user_auth
 import (
 	"time"
 
-	"github.com/jmoiron/sqlx"
 	"smarthead/internal/account/account_preference"
 	"smarthead/internal/platform/auth"
 	"smarthead/internal/user"
 	"smarthead/internal/user_account"
+
+	"github.com/jmoiron/sqlx"
 )
 
 // Repository defines the required dependencies for User Auth.

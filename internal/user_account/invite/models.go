@@ -6,14 +6,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jmoiron/sqlx"
-	"github.com/pkg/errors"
-	"github.com/sudo-suhas/symcrypto"
 	"smarthead/internal/account"
 	"smarthead/internal/platform/notify"
 	"smarthead/internal/platform/web/webcontext"
 	"smarthead/internal/user"
 	"smarthead/internal/user_account"
+
+	"github.com/jmoiron/sqlx"
+	"github.com/pkg/errors"
+	"github.com/sudo-suhas/symcrypto"
 )
 
 // Repository defines the required dependencies for User Invite.

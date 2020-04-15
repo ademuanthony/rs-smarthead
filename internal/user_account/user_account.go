@@ -5,15 +5,16 @@ import (
 	"database/sql"
 	"time"
 
+	"smarthead/internal/account"
+	"smarthead/internal/platform/auth"
+	"smarthead/internal/platform/web/webcontext"
+	"smarthead/internal/user"
+
 	"github.com/huandu/go-sqlbuilder"
 	"github.com/jmoiron/sqlx"
 	"github.com/pborman/uuid"
 	"github.com/pkg/errors"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	"smarthead/internal/account"
-	"smarthead/internal/platform/auth"
-	"smarthead/internal/platform/web/webcontext"
-	"smarthead/internal/user"
 )
 
 var (

@@ -3,11 +3,12 @@ package user_account
 import (
 	"context"
 
+	"smarthead/internal/platform/auth"
+	"smarthead/internal/platform/web/webcontext"
+
 	"github.com/huandu/go-sqlbuilder"
 	"github.com/pkg/errors"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	"smarthead/internal/platform/auth"
-	"smarthead/internal/platform/web/webcontext"
 )
 
 // UserFindByAccount lists all the users for a given account ID.

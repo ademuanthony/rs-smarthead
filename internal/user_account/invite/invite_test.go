@@ -6,9 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
-	"github.com/pborman/uuid"
-	"github.com/pkg/errors"
 	"smarthead/internal/account"
 	"smarthead/internal/platform/auth"
 	"smarthead/internal/platform/notify"
@@ -16,6 +13,10 @@ import (
 	"smarthead/internal/platform/web/webcontext"
 	"smarthead/internal/user"
 	"smarthead/internal/user_account"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/pborman/uuid"
+	"github.com/pkg/errors"
 )
 
 var (

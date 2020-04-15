@@ -7,11 +7,12 @@ import (
 	"encoding/json"
 	"time"
 
+	"smarthead/internal/platform/web"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 	"github.com/pkg/errors"
 	"gopkg.in/go-playground/validator.v9"
-	"smarthead/internal/platform/web"
 )
 
 // Repository defines the required dependencies for Account.
