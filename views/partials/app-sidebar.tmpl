@@ -1,0 +1,88 @@
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <img alt="REMOTE SCHOOL" class="logo" style="height:60px;" src="{{ SiteAssetUrl "/images/remote-school-logo.png" }}">
+        </a>
+ 
+        {{ if HasAuth $._Ctx }}
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {{block "dashboardActive" .}}{{end}}">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            {{ if HasRole $._Ctx "admin" }}
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item {{block "usersActive" .}}{{end}}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#navSectionUsers" aria-expanded="true" aria-controls="navSectionUsers">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Users</span>
+                </a>
+                <div id="navSectionUsers" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/users">Manage Users</a>
+                        <a class="collapse-item" href="/admin/students">Students</a>
+                    </div> 
+                </div>
+            </li>
+            <li class="nav-item {{block "classesActive" .}}{{end}}">
+                <a class="nav-link" href="/admin/classes">
+                    <i class="fas fa-fw fa-layer-group"></i> 
+                    <span>Classes</span></a>
+            </li>
+            <li class="nav-item {{block "subjectsActive" .}}{{end}}">
+                <a class="nav-link" href="/admin/subjects">
+                    <i class="fas fa-fw fa-layer-group"></i>
+                    <span>Subjects</span></a>
+            </li>
+            <li class="nav-item {{block "periodsActive" .}}{{end}}">
+                <a class="nav-link" href="/admin/periods">
+                    <i class="fas fa-fw fa-layer-group"></i>
+                    <span>Periods</span></a>
+            </li>
+            <li class='nav-item {{block "adminDepositsActive" .}}{{end}}'>
+                <a class="nav-link" href="/admin/deposits">
+                    <i class="fas fa-fw fa-layer-group"></i>
+                    <span>Deposits</span></a>
+            </li>
+            <li class='nav-item {{block "adminSubscriptionsActive" .}}{{end}}'>
+                <a class="nav-link" href="/admin/subscriptions">
+                    <i class="fas fa-fw fa-layer-group"></i>
+                    <span>Subscriptions</span></a>
+            </li>
+            {{ else }}
+            <li class='nav-item {{block "subscriptionsActive" .}}{{end}}'>
+                <a class="nav-link" href="/subscriptions">
+                    <i class="fas fa-fw fa-layer-group"></i>
+                    <span>My Subscriptions</span></a>
+            </li>
+
+            <!-- <li class="nav-item {{block "lessonsActive" .}}{{end}}">
+                <a class="nav-link" href="/lessons">
+                    <i class="fas fa-fw fa-layer-group"></i>
+                    <span>Lessons</span></a>
+            </li> -->
+            {{end}}
+
+        {{ end }}
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
