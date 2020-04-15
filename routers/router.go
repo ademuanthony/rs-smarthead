@@ -5,7 +5,7 @@ import (
 	"github.com/astaxie/beego"
 )
 
-func init() {
+func init() { 
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/pricing",&controllers.MainController{},"*:Pricing")
 	beego.Router("/support",&controllers.MainController{},"*:Support")
