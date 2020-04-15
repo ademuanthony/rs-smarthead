@@ -1,0 +1,188 @@
+{{ template "../layouts/site.tpl" .}}
+
+{{define "title"}}Create an Account{{end}}
+{{define "description"}}Sign Up for free to our Software-as-a-Service solution. {{end}}
+{{define "style"}}
+
+{{end}}
+{{ define "partials/app-wrapper" }}
+    <div class="container" id="page-content">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            {{ template "app-flashes" . }}
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Student Registration!</h1>
+                                <p class="lead">If you are a teacher,
+                                 <a href="https://forms.gle/xgnAREA3fByZYKuc6" target="_blank">Apply here</a></p>
+                            </div>
+                            {{ template "validation-error" . }}
+                            <hr/>
+                            <form class="user" method="POST" novalidate>
+                                <div>
+                                    <h2 class="h5 text-gray-900 mt-3 mb-3">Your User details</h2>
+                                </div>
+                                <div class="form-group row"> 
+                                    <div class="col-md-4 col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text"
+                                               class="form-control form-control-user {{ ValidationFieldClass $.validationErrors "User.FirstName" }}"
+                                               name="User.FirstName" value="{{ $.form.User.FirstName }}" placeholder="First Name" required>
+                                        {{template "invalid-feedback" dict "fieldName" "User.FirstName" "validationDefaults" $.validationDefaults "validationErrors" $.validationErrors }}
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        <input type="text"
+                                               class="form-control form-control-user {{ ValidationFieldClass $.validationErrors "User.LastName" }}"
+                                               name="User.LastName" value="{{ $.form.User.LastName }}" placeholder="Last Name" required>
+                                        {{template "invalid-feedback" dict "fieldName" "User.LastName" "validationDefaults" $.validationDefaults "validationErrors" $.validationErrors }}
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <select name="ClassID" class="form-control">
+                                            <option value="">Select Class</option>
+                                            {{ $classID :=  $.form.ClassID }}
+                                            {{ range $class := .classes }}
+                                            <option value="{{ $class.ID }}" {{ if eq $classID $class.ID }}selected{{ end }}>{{ $class.Name }}</option>
+                                            {{ end }}
+                                        </select>
+                                        {{template "invalid-feedback" dict "fieldName" "ClassID" "validationDefaults" $.validationDefaults "validationErrors" $.validationErrors }}
+                                   </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-sm-0">
+                                        <input type="email"
+                                                   class="form-control form-control-user {{ ValidationFieldClass $.validationErrors "User.Email" }}"
+                                                   name="User.Email" value="{{ $.form.User.Email }}" placeholder="Email Address" required>
+                                            {{template "invalid-feedback" dict "fieldName" "User.Email" "validationDefaults" $.validationDefaults "validationErrors" $.validationErrors }}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-sm-0">
+                                        <input type="text"
+                                                   class="form-control form-control-user {{ ValidationFieldClass $.validationErrors "User.Phone" }}"
+                                                   name="User.Phone" value="{{ $.form.User.Phone }}" placeholder="Phone Number" required>
+                                            {{template "invalid-feedback" dict "fieldName" "User.Phone" "validationDefaults" $.validationDefaults "validationErrors" $.validationErrors }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password"
+                                               class="form-control form-control-user {{ ValidationFieldClass $.validationErrors "User.Password" }}"
+                                               name="User.Password" value="{{ $.form.User.Password }}" placeholder="Password" required>
+                                        {{template "invalid-feedback" dict "fieldName" "User.Password" "validationDefaults" $.validationDefaults "validationErrors" $.validationErrors }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password"
+                                               class="form-control form-control-user {{ ValidationFieldClass $.validationErrors "User.PasswordConfirm" }}"
+                                               name="User.PasswordConfirm" value="{{ $.form.User.PasswordConfirm }}" placeholder="Repeat Password" required>
+                                        {{template "invalid-feedback" dict "fieldName" "User.PasswordConfirm" "validationDefaults" $.validationDefaults "validationErrors" $.validationErrors }}
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary btn-user btn-block">
+                                    Register Account
+                                </button>
+
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="/user/login">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}
+{{define "js"}}
+    <script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.2.2/dist/latest/bootstrap-autocomplete.min.js"></script>
+
+    <script>
+         $(document).ready(function() {
+            $(document).find('body').addClass('bg-gradient-primary');
+
+            $('#selectAccountCountry').on('change', function () {
+
+                
+                
+                if ($(this).find('option:selected').attr('data-geonames') == 1) {
+
+                    
+                    $('#divAccountRegion').html('<div class="form-control-select-wrapper"><select class="form-control form-control-select-box is-invalid" id="inputAccountRegion" name="Account.Region" value="" placeholder="Region" required></select></div>');
+
+                    
+                    
+                    $.ajax({
+                        type: 'GET',
+                        contentType: 'application/json',
+                        url: '/geo/regions/autocomplete',
+                        data: {country_code: $(this).val(), select: true},
+                        dataType: 'json'
+                    }).done(function (res) {
+                        if (res !== undefined && res !== null) {
+                            for (var c in res) {
+                                $('#inputAccountRegion').append('<option value="'+res[c].value+'">'+res[c].text+'</option>');
+                            }
+                        }
+                    });
+
+                    
+
+
+                    
+                    $('#divAccountZipcode').html('<input class="form-control  form-control-user is-invalid" id="inputAccountZipcode"  name="Account.Zipcode" value="" placeholder="Zipcode" required>');
+                    $('#inputAccountZipcode').autoComplete({
+                        minLength: 2,
+                        events: {
+                            search: function (qry, callback) {
+                                $.ajax({
+                                    type: 'GET',
+                                    contentType: 'application/json',
+                                    url: '/geo/postal_codes/autocomplete',
+                                    data: {query: qry, country_code: $('#selectAccountCountry').val()},
+                                    dataType: 'json'
+                                }).done(function (res) {
+                                    callback(res)
+                                });
+                            }
+                        }
+                    });
+
+                    
+                    
+                    $('#inputAccountZipcode').on('change', function() {
+                        $.ajax({
+                            type: 'GET',
+                            contentType: 'application/json',
+                            url: '/geo/geonames/postal_code/'+$(this).val(),
+                            data: {country_code: $('#selectAccountCountry').val()},
+                            dataType: 'json'
+                        }).done(function (res) {
+                            if (res !== undefined && res !== null && res.PostalCode !== undefined) {
+                                $('#inputAccountCity').val(res.PlaceName);
+                                $('#inputAccountRegion').val(res.StateCode);
+                            }
+                        });
+                    });
+
+                } else {
+
+                    
+                    $('#divAccountZipcode').html('<input type="text" class="form-control form-control-user is-invalid" id="inputAccountZipcode"  name="Account.Zipcode" value="" placeholder="Zipcode" required>');
+
+                    
+                    $('#divAccountRegion').html('<input type="text" class="form-control form-control-user is-invalid" id="inputAccountRegion" name="Account.Region" value="" placeholder="Region" required>');
+
+                }
+            }).change();
+
+            hideDuplicateValidationFieldErrors();
+
+        });
+    </script>
+{{end}}
