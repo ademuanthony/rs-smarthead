@@ -78,7 +78,7 @@
                         <!-- social icon-->
                         <div class="col-sm-12">
                             <ul class="social-network">
-                                <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="waves-effect waves-dark" href="https://web.facebook.com/onlineremoteschool/"><i class="fa fa-facebook"></i></a></li>
                                 <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-instagram"></i></a></li>
