@@ -19,3 +19,7 @@ func (c *MainController) Pricing() {
 func (c *MainController) Support() {
 	c.TplName = "site/support.html"
 }
+
+func (c *MainController) GConsole() {
+	c.TplName = "site/google6058e3992c01a0e3.html"
+}
