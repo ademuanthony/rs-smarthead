@@ -78,6 +78,7 @@
                         <!-- social icon-->
                         <div class="col-sm-12">
                             <ul class="social-network">
+                                <il><a class="waves-effect waves-dark" href="https://api.whatsapp.com/send?phone=2347010007062&text=I%20would%20like%20to%20try%20your%20free%20lessons"><i class="fa fa-whatsapp"></i></a></il>
                                 <li><a class="waves-effect waves-dark" href="https://web.facebook.com/onlineremoteschool/"><i class="fa fa-facebook"></i></a></li>
                                 <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-linkedin"></i></a></li>
