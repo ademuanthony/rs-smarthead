@@ -8,6 +8,8 @@ import (
 func init() { 
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/pricing",&controllers.MainController{},"*:Pricing")
+	beego.Router("/about",&controllers.MainController{},"*:About")
+	beego.Router("/contact",&controllers.MainController{},"*:Contact")
 	beego.Router("/support",&controllers.MainController{},"*:Support")
 	beego.Router("/google6058e3992c01a0e3.html", &controllers.MainController{}, "*:GConsole")
 	//User

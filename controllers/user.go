@@ -11,12 +11,15 @@ import (
 	"smarthead/internal/platform/web"
 	"smarthead/internal/platform/web/webcontext"
 	"smarthead/internal/platform/web/weberror"
+	"smarthead/internal/student"
 	"smarthead/internal/user"
 	"smarthead/internal/user_account"
 	"smarthead/internal/user_auth"
 	"time"
 
+	"cloud.google.com/go/firestore"
 	"github.com/astaxie/beego"
+	"github.com/pborman/uuid"
 	"github.com/gorilla/schema"
 	"github.com/gorilla/sessions"
 	"github.com/pkg/errors"
@@ -189,4 +192,33 @@ func updateContextClaims(ctx context.Context, authenticator *auth.Authenticator,
 
 func (c *UserController) Register()  {
 	c.TplName = "user/register.html"
+}
+
+func (c *UserController) RegisterStudent() {
+	flash := beego.NewFlash()
+	projectID := beego.AppConfig.String("project_id")
+	client, err := firestore.NewClient(c.Ctx.Request.Context(), projectID)
+	if err != nil {
+		flash.Error("Cannot connect to the database, ", err.Error())
+		c.Redirect("/", http.StatusPermanentRedirect)
+		return
+	}
+	defer client.Close()
+
+	req := new(student.CreateRequest)
+	_, _, err = client.Collection("students").Add(c.Ctx.Request.Context(), map[string]interface{}{
+		"ID": uuid.NewRandom().String(),
+		"Name": req.Name,
+		"Phone": req.ParentPhone,
+		"Email": req.ParentEmail,
+		"Class": req.ClassID,
+	})
+	if err != nil {
+		flash.Error("Error in added record to database. Please try again later or contact the admin for help, ", err.Error())
+		c.Redirect("/", http.StatusPermanentRedirect)
+		return
+	}
+
+	flash.Success("Congratulation! Your request has been submitted successfully. You will receive and email from us once your class is scheduled")
+	c.Redirect("/", 308)
 }

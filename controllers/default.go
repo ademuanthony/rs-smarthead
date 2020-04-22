@@ -9,7 +9,7 @@ type MainController struct {
 }
 
 func (c *MainController) Get() {
-	c.TplName = "site/default.html"
+	c.TplName = "site/dtox_index.html"
 }
 
 func (c *MainController) Pricing() {
@@ -18,6 +18,14 @@ func (c *MainController) Pricing() {
 
 func (c *MainController) Support() {
 	c.TplName = "site/support.html"
+}
+
+func (c *MainController) About() {
+	c.TplName = "site/about.html"
+}
+
+func (c *MainController) Contact() {
+	c.TplName = "site/contact.html"
 }
 
 func (c *MainController) GConsole() {

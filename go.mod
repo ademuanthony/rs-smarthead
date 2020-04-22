@@ -3,6 +3,7 @@ module smarthead
 go 1.13
 
 require (
+	cloud.google.com/go/firestore v1.2.0
 	github.com/DATA-DOG/go-sqlmock v1.4.1 // indirect
 	github.com/DataDog/datadog-go v3.5.0+incompatible // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
@@ -19,7 +20,7 @@ require (
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/google/go-cmp v0.4.0
-	github.com/google/uuid v1.1.1 // indirect
+	github.com/google/uuid v1.1.1
 	github.com/gorilla/schema v1.1.0
 	github.com/gorilla/sessions v1.2.0
 	github.com/huandu/go-sqlbuilder v1.7.0
@@ -55,7 +56,7 @@ require (
 	github.com/volatiletech/sqlboiler v3.7.0+incompatible
 	github.com/xwb1989/sqlparser v0.0.0-20180606152119-120387863bf2
 	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
-	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
+	google.golang.org/api v0.20.0
 	gopkg.in/DataDog/dd-trace-go.v1 v1.23.1
 	gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
 	gopkg.in/go-playground/validator.v9 v9.31.0
