@@ -2,7 +2,9 @@ package routers
 
 import (
 	"smarthead/controllers"
+
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
 )
 
 func init() { 
@@ -13,6 +15,10 @@ func init() {
 	beego.Router("/support",&controllers.MainController{},"*:Support")
 	beego.Router("/google6058e3992c01a0e3.html", &controllers.MainController{}, "*:GConsole")
 	//User
-	beego.Router("/user/login", &controllers.UserController{}, "*:Login")
-	beego.Router("/signup", &controllers.UserController{}, "*:Register")
+	// beego.Router("/user/login", &controllers.UserController{}, "*:Login")
+	// beego.Router("/signup", &controllers.UserController{}, "*:Register")
+
+	beego.InsertFilter("/static/*", beego.BeforeStatic, func(ctx *context.Context) { 
+        ctx.Output.Header("Cache-control", "max-age=5")
+	})
 }
