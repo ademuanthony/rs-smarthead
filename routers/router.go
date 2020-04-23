@@ -8,6 +8,10 @@ import (
 )
 
 func init() { 
+	beego.InsertFilter("/static/*", beego.BeforeStatic, func(ctx *context.Context) { 
+        ctx.Output.Header("Cache-control", "max-age=5")
+	})
+
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/pricing",&controllers.MainController{},"*:Pricing")
 	beego.Router("/about",&controllers.MainController{},"*:About")
@@ -17,8 +21,4 @@ func init() {
 	//User
 	// beego.Router("/user/login", &controllers.UserController{}, "*:Login")
 	// beego.Router("/signup", &controllers.UserController{}, "*:Register")
-
-	beego.InsertFilter("/static/*", beego.BeforeStatic, func(ctx *context.Context) { 
-        ctx.Output.Header("Cache-control", "max-age=5")
-	})
 }
