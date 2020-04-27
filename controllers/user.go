@@ -194,7 +194,7 @@ func (c *UserController) Register()  {
 	c.TplName = "user/register.html"
 }
 
-func (c *UserController) RegisterStudent() {
+func (c *UserController) GetStarted() {
 	flash := beego.NewFlash()
 	projectID := beego.AppConfig.String("project_id")
 	client, err := firestore.NewClient(c.Ctx.Request.Context(), projectID)
@@ -206,6 +206,14 @@ func (c *UserController) RegisterStudent() {
 	defer client.Close()
 
 	req := new(student.CreateRequest)
+	decoder := schema.NewDecoder()
+	decoder.IgnoreUnknownKeys(true)
+
+	if err := decoder.Decode(req, c.Ctx.Request.PostForm); err != nil {
+		flash.Error("Error in decoding form values, ", err.Error())
+		c.Redirect("/", http.StatusPermanentRedirect)
+		return
+	}
 	_, _, err = client.Collection("students").Add(c.Ctx.Request.Context(), map[string]interface{}{
 		"ID": uuid.NewRandom().String(),
 		"Name": req.Name,
@@ -220,5 +228,9 @@ func (c *UserController) RegisterStudent() {
 	}
 
 	flash.Success("Congratulation! Your request has been submitted successfully. You will receive and email from us once your class is scheduled")
-	c.Redirect("/", 308)
+	c.Redirect("/thank-you", 308)
+}
+
+func (c  *UserController) ThankYou()  {
+	c.TplName = "site/thank_you.html"
 }

@@ -8,8 +8,25 @@ type MainController struct {
 	beego.Controller
 }
 
+var classes = []string{
+	"PRI 4",
+	"PRI 5",
+	"PRI 6",
+	"JSS 1",
+	"JSS 2",
+	"JSS 3",
+	"SSS 1",
+	"SSS 2",
+	"SSS 3",
+}
+
 func (c *MainController) Get() {
+	c.Data["classes"] = classes
 	c.TplName = "site/dtox_index.html"
+}
+
+func (c *MainController) ThankYou() {
+	c.TplName = "site/thank_you.html"
 }
 
 func (c *MainController) Pricing() {

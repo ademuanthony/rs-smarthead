@@ -19,6 +19,8 @@ func init() {
 	beego.Router("/support",&controllers.MainController{},"*:Support")
 	beego.Router("/google6058e3992c01a0e3.html", &controllers.MainController{}, "*:GConsole")
 	//User
-	// beego.Router("/user/login", &controllers.UserController{}, "*:Login")
+	beego.Router("/get-started", &controllers.UserController{}, "*:GetStarted")
+	beego.Router("/thank-you", &controllers.UserController{}, "*:ThankYou")
+	//beego.Router("/user/login", &controllers.UserController{}, "*:Login")
 	// beego.Router("/signup", &controllers.UserController{}, "*:Register")
 }
