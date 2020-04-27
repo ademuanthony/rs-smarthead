@@ -84,7 +84,7 @@ func (m *Student) Response(ctx context.Context) *Response {
 		CreatedAt:      web.NewTimeResponse(ctx, m.CreatedAt),
 		UpdatedAt:      web.NewTimeResponse(ctx, m.UpdatedAt),
 	}
-	
+
 	return r
 }
 
@@ -109,9 +109,9 @@ type CreateRequest struct {
 	Username       string `json:"username" json:"username" validate:"required" toml:"username" yaml:"username"`
 	Age            int    `json:"age" toml:"age" yaml:"age"`
 	AccountBalance int    `json:"account_balance" toml:"account_balance" yaml:"account_balance"`
-	ClassID        string `json:"class_id" toml:"class_id" yaml:"class_id"`
-	ParentPhone    string `json:"parent_phone" validate:"required" toml:"parent_phone" yaml:"parent_phone"`
-	ParentEmail    string `json:"parent_email" validate:"required" toml:"parent_email" yaml:"parent_email"`
+	Class          string `json:"class_id" toml:"class_id" yaml:"class_id"`
+	Phone          string `json:"parent_phone" validate:"required" toml:"parent_phone" yaml:"parent_phone"`
+	Email          string `json:"parent_email" validate:"required" toml:"parent_email" yaml:"parent_email"`
 }
 
 // ReadRequest defines the information needed to read a checklist.

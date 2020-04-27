@@ -17,7 +17,7 @@ var classes = []string{
 	"JSS 3",
 	"SSS 1",
 	"SSS 2",
-	"SSS 3",
+	"SSS 3", 
 }
 
 func (c *MainController) Get() {

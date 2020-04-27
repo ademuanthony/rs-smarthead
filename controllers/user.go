@@ -19,10 +19,11 @@ import (
 
 	"cloud.google.com/go/firestore"
 	"github.com/astaxie/beego"
-	"github.com/pborman/uuid"
 	"github.com/gorilla/schema"
 	"github.com/gorilla/sessions"
+	"github.com/pborman/uuid"
 	"github.com/pkg/errors"
+	"google.golang.org/api/option"
 )
 
 type UserController struct {
@@ -195,12 +196,14 @@ func (c *UserController) Register()  {
 }
 
 func (c *UserController) GetStarted() {
+	sa := option.WithCredentialsFile(beego.AppConfig.String("firebase_key_path"))
 	flash := beego.NewFlash()
 	projectID := beego.AppConfig.String("project_id")
-	client, err := firestore.NewClient(c.Ctx.Request.Context(), projectID)
+	client, err := firestore.NewClient(c.Ctx.Request.Context(), projectID, sa)
 	if err != nil {
+		beego.Error("Firebase error - ", err)
 		flash.Error("Cannot connect to the database, ", err.Error())
-		c.Redirect("/", http.StatusPermanentRedirect)
+		c.Redirect("/", 302)
 		return
 	}
 	defer client.Close()
@@ -211,24 +214,27 @@ func (c *UserController) GetStarted() {
 
 	if err := decoder.Decode(req, c.Ctx.Request.PostForm); err != nil {
 		flash.Error("Error in decoding form values, ", err.Error())
-		c.Redirect("/", http.StatusPermanentRedirect)
+		c.Redirect("/", http.StatusSeeOther)
 		return
 	}
+
+	beego.Info(req)
 	_, _, err = client.Collection("students").Add(c.Ctx.Request.Context(), map[string]interface{}{
 		"ID": uuid.NewRandom().String(),
 		"Name": req.Name,
-		"Phone": req.ParentPhone,
-		"Email": req.ParentEmail,
-		"Class": req.ClassID,
+		"Phone": req.Phone,
+		"Email": req.Email,
+		"Class": req.Class,
 	})
 	if err != nil {
-		flash.Error("Error in added record to database. Please try again later or contact the admin for help, ", err.Error())
-		c.Redirect("/", http.StatusPermanentRedirect)
+		flash.Error("Error in adding record to database. Please try again later or contact the admin for help, ", err.Error())
+		beego.Error("Getting started 2", err)
+		c.Redirect("/", http.StatusSeeOther)
 		return
 	}
 
 	flash.Success("Congratulation! Your request has been submitted successfully. You will receive and email from us once your class is scheduled")
-	c.Redirect("/thank-you", 308)
+	c.Redirect("/thank-you", 302)
 }
 
 func (c  *UserController) ThankYou()  {

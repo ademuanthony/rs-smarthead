@@ -28,7 +28,7 @@ affordable interactive online private teaching and learning.{{end}}
                       <form method="post" action="/get-started">
                           <div class="form-row">
                               <div class="col-md-3 col-sm-12 mt-3">
-                                  <select name="class_id" required class="form-control">
+                                  <select name="class" required class="form-control">
                                       <option value="">Select Class</option>
                                       {{ range $class := .classes }}
                                       <option value="{{ $class }}">{{ $class }}</option>
@@ -39,10 +39,10 @@ affordable interactive online private teaching and learning.{{end}}
                                   <input name="name" required type="text" class="form-control" placeholder="Full Name">
                               </div>
                               <div class="col-md-3 col-sm-12 mt-3">
-                                  <input name="parent_email" required type="text" class="form-control" placeholder="Email">
+                                  <input name="email" required type="email" class="form-control" placeholder="Email">
                               </div>
                               <div class="col-md-3 col-sm-12 mt-3">
-                                  <input name="parent_phone" required type="text" class="form-control" placeholder="Phone Number">
+                                  <input name="phone" required type="text" class="form-control" placeholder="Phone Number">
                               </div>
                           </div>
                           <input type="submit" class="btb btn-danger btn-lg mt-3" value="Register">
