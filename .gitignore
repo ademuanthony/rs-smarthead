@@ -1,3 +1,11 @@
+.idea
+.env_docker_compose
+.local.env
+.aws-deploy.env
+.DS_Store
+tmp
+.devops.json
+docker-compose.yml
 smarthead
 conf/app.conf
-remoteschool-d647e-firebase-adminsdk-icnh2-1cd4390581.json
+Agora_Web_SDK_FULL
