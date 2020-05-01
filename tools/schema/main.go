@@ -8,13 +8,14 @@ import (
 	"os"
 	"strings"
 
+	"github.com/joho/godotenv"
 	"github.com/lib/pq"
 	_ "github.com/lib/pq"
 	"github.com/urfave/cli"
 	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 	sqlxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx"
-	"remoteschool/smarthead/internal/platform/web/webcontext"
-	"remoteschool/smarthead/internal/schema"
+	"smarthead/internal/platform/web/webcontext"
+	"smarthead/internal/schema"
 )
 
 // service is the name of the program used for logging, tracing and the
@@ -33,6 +34,11 @@ type DB struct {
 }
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	// =========================================================================
 	// Logging
@@ -114,7 +120,7 @@ func main() {
 		},
 	}
 
-	err := app.Run(os.Args)
+	err = app.Run(os.Args)
 	if err != nil {
 		log.Fatalf("%+v", err)
 	}
