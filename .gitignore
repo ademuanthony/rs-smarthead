@@ -10,3 +10,4 @@ docker-compose.yml
 smarthead
 conf/app.conf
 Agora_Web_SDK_FULL
+app/node_modules
